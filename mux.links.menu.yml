@@ -1,0 +1,5 @@
+mux.mux_settings:
+  title: Mux settings
+  parent: system.admin_config_media
+  route_name: mux.mux_settings
+  weight: 10

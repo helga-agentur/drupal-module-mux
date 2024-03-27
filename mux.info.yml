@@ -1,0 +1,5 @@
+name: 'Mux API Integration'
+type: module
+description: 'Provides functionality to authenticate with the Mux.com video API, upload videos and retrieve playback IDs'
+package: Custom
+core_version_requirement: ^10 || ^11

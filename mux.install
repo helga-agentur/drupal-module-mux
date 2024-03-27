@@ -1,0 +1,38 @@
+<?php
+
+
+/**
+ * Implements hook_requirements().
+ */
+function mux_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    $config = \Drupal::config('mux.settings');
+
+    if (!empty($config->get('username')) && !empty($config->get('password'))) {
+      $requirements['mux'] = [
+        'title' => t('Mux'),
+        'value' => t('API Access Token detected'),
+        'severity' => REQUIREMENT_OK,
+      ];
+    }
+    else {
+      $message = t('You have not provided a Mux API Access Token credentials yet. This is required for its functionality to work. Please obtain an API Access Token from <a href=":dashboard">your Mux dashboard</a> and add it to the <a href=":settings">Mux settings configuration here</a>.',
+        [
+          ':dashboard' => 'https://platform.openai.com/',
+          ':settings' => '/admin/config/media/mux-settings'
+        ],
+      );
+
+      $requirements['mux'] = [
+        'title' => t('Mux'),
+        'value' => t('Access Token not provided'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $message,
+      ];
+    }
+  }
+
+  return $requirements;
+}

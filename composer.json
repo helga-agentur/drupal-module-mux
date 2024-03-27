@@ -1,0 +1,14 @@
+{
+    "name": "helga/mux",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "jb-simon",
+            "email": "simon@joinbox.com"
+        }
+    ],
+    "require": {
+        "muxinc/mux-php": "^3.15"
+    }
+}

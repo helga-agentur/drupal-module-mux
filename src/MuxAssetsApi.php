@@ -80,10 +80,10 @@ class MuxAssetsApi implements ContainerInjectionInterface {
    * @param Asset|null $asset
    *   The asset from which to retrieve the playback id.
    *
-   * @return null
+   * @return string|null
    *   The playback id if it exists, null otherwise.
    */
-  public function getPlaybackIdFromAsset(?Asset $asset) {
+  public function getPlaybackIdFromAsset(?Asset $asset): ?string {
     try {
       $playbackIds = $asset->getPlaybackIds();
 
@@ -108,17 +108,18 @@ class MuxAssetsApi implements ContainerInjectionInterface {
    */
   public function pollAssetStatus(string $assetId) {
     try {
-      $status = $this->assetsApi->getAsset($assetId)->getData()->getStatus();
+      $status = '';
 
       // Poll the Mux API until the video is ready
       while ($status !== 'ready') {
-        sleep(1);
         $asset = $this->assetsApi->getAsset($assetId)->getData();
         $status = $asset->getStatus();
 
         if ($status === 'errored') {
           throw new \Exception('Video processing failed. ' . implode(', ', $asset->getErrors()->getMessages()));
         }
+
+        sleep(1);
       }
 
     } catch (ApiException $e) {

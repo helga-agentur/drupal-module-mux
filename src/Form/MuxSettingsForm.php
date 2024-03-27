@@ -28,6 +28,7 @@ final class MuxSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
+    $config = $this->config('mux.settings');
 
     $form['message'] = [
       '#markup' => '<p>' . $this->t('An Access Token which includes the ID and the secret key is required to interface with Mux API. Get your API Access Token by creating one in your <a href=":link" target="_blank">Mux Dashboard</a>.', [':link' => 'https://dashboard.mux.com/settings/access-tokens']) . '</p>'
@@ -37,14 +38,14 @@ final class MuxSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
       '#type' => 'textfield',
       '#title' => $this->t('Token ID'),
-      '#default_value' => $this->config('mux.settings')->get('username'),
+      '#default_value' => $config->get('username'),
     ];
 
     $form['password'] = [
       '#required' => TRUE,
       '#type' => 'textfield',
       '#title' => $this->t('Token secret'),
-      '#default_value' => $this->config('mux.settings')->get('password'),
+      '#default_value' => $config->get('password'),
     ];
 
     return parent::buildForm($form, $form_state);

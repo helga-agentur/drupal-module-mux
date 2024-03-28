@@ -1,0 +1,10 @@
+mux.settings:
+  type: config_object
+  label: 'Mux settings'
+  mapping:
+    username:
+      type: string
+      label: 'Token ID'
+    password:
+      type: string
+      label: 'Token secret'

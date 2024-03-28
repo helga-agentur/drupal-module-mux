@@ -1,0 +1,11 @@
+services:
+  mux.assets_api_client:
+    class: MuxPhp\Api\AssetsApi
+    factory: ['@mux.assets_api_client_factory', create]
+  mux.assets_api_client_factory:
+    class: Drupal\mux\Http\AssetsApiClientFactory
+    arguments: ['@config.factory']
+  mux.assets_api:
+    class: Drupal\mux\MuxAssetsApi
+    arguments: ['@mux.assets_api_client', '@logger.factory']
+

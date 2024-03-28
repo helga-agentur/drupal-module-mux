@@ -1,0 +1,7 @@
+mux.mux_settings:
+  path: '/admin/config/media/mux-settings'
+  defaults:
+    _title: 'Mux settings'
+    _form: 'Drupal\mux\Form\MuxSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
